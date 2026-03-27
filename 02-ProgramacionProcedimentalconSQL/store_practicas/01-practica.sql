@@ -1,0 +1,41 @@
+CREATE OR ALTER ups_insertar_venta
+@idCliente NCHAR (5),
+@idProducto INT,
+@cantidad INT
+AS
+BEGIN
+
+    DECLARE @existencia INT
+    
+    BEGIN TRY
+
+    IF NOT EXISTS (SELECT 1 FROM Clientes WHERE idCliente = @idCliente)
+    BEGIN 
+        THROW 5001; 'EL CLIENTE NO EXISTE', 1;
+    END
+
+
+    --VALIDAR SI EL PRODUCTO EXISTE
+    --VERIFICAR EL STOCK CON LA CANTIDAD SOLICITADA
+
+    BEGIN TRANSACTION
+
+    --INSERCION VENTAS
+    --VERIFICAR EL PRECIO DEL PRODUCTO
+    --INSERTAR EN DETALLE VENTAS
+    --ACTUALIZAR STOCK EN PRODUCTO
+  
+
+    COMMIT;
+
+
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0
+        ROLLBACK;
+
+        PRINT 'Error: ' + ERROR_MESSAGE();
+    END CATCH
+
+END;
+GO

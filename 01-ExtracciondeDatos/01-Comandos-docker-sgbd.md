@@ -27,3 +27,4 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" \
 
 
 /var/opt/mssql/data/
+

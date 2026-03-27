@@ -36,7 +36,7 @@ FROM Products;
 SELECT *, (UnitPrice * Quantity - (1-Discount)) AS [Importe]
 FROM [Order Details]
 
-SELECT
+SELECT 
 	ROUND(SUM(UnitPrice * Quantity - (1-Discount)),2) AS [Importe]
 FROM [Order Details]
 
@@ -67,8 +67,11 @@ FROM Customers;
 --Seleccionar la suma de las cantidades vendidas
 --por cada ordenid (agrupadas)
 SELECT
-	COUNT(orderid), SUM(Quantity) AS [Total de Cantidades]
+	COUNT(orderid) AS [Total de Ordenes], 
+	SUM(Quantity) AS [Total de Cantidades]
 FROM [Order Details]
+
+SELECT * FROM [Order Details]
 
 SELECT
 	OrderID, SUM(Quantity) AS [Total de Cantidades]
@@ -134,7 +137,8 @@ ORDER BY [Total de Ordenes] DESC
 
 --Ventas totales por producto
 
-SELECT p.ProductName, ROUND(SUM(od.Quantity * od.UnitPrice * (1-Discount)),2) AS [VENTAS Totales]
+SELECT p.ProductName, 
+	   ROUND(SUM(od.Quantity * od.UnitPrice * (1-Discount)),2) AS [VENTAS Totales]
 FROM [Order Details] AS od
 INNER JOIN Products AS p
 ON p.ProductID = od.ProductID
