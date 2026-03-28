@@ -143,22 +143,22 @@ AS
 BEGIN
 
     IF EXISTS (
-                SELECT 1 
-                FROM inserted AS i
-                INNER JOIN deleted AS d 
-                ON i.id = d.id
-                WHERE i.precio = d.precio
-                
+        SELECT 1 
+        FROM inserted i
+        INNER JOIN deleted d 
+            ON i.id = d.id
+        WHERE i.precio <> d.precio
     )
     BEGIN
-        PRINT ('No se puede cambiar el precio')
-         ROLLBACK TRANSACTION;
+        PRINT 'No se puede cambiar el precio';
+        ROLLBACK TRANSACTION;
     END
+
 END;
 GO
 
 SELECT * FROM Productos2
 
-UPDATE Products 
+UPDATE Productos2 
 SET precio = 600 
 WHERE id = 1;
