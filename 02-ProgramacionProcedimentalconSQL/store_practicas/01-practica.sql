@@ -149,7 +149,4 @@ GO
 UPDATE DetalleVenta 
 SET PrecioVenta = 600 
 WHERE idVenta = 1;
-<<<<<<< HEAD
-=======
-GO
->>>>>>> 4980b05ef3cc385219823f3cc494e70bacbea69c
+
