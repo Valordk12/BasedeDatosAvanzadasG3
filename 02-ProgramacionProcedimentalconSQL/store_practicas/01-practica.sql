@@ -143,3 +143,7 @@ BEGIN
 END
 END;
 GO
+
+UPDATE DetalleVenta 
+SET PrecioVenta = 600 
+WHERE idVenta = 1;
