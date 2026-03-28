@@ -50,3 +50,5 @@ Remplaza la operación  original
 | :--- | :--- |
 | INSERTED | Nuevos Datos |
 | DELETED | Datos Anteriores |
+
+
