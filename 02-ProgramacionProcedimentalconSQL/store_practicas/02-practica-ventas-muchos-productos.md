@@ -101,7 +101,7 @@ GO
 
 ## Diagrama de Base de Datos ##
 
-![Diagrama ER](./img/diagrama.png)
+![Diagrama ER](../../img/diagrama2.png)
 
 Se crea la base de datos llamada bdStoredVentas, la cual será utilizada para almacenar la información relacionada con ventas, productos y clientes. Posteriormente, se selecciona dicha base de datos con USE.
 
