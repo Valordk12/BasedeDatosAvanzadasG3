@@ -1,55 +1,4 @@
-CREATE DATABASE bdStoredVentas;
-GO
-
 USE bdStoredVentas;
-GO
-
-SELECT 
-ProductID,
-ProductName,
-UnitPrice,
-UnitsInStock
-INTO Producto
-FROM NORTHWND.dbo.Products;
-
-ALTER TABLE Producto
-ADD CONSTRAINT pk_producto PRIMARY KEY (ProductID);
-GO
-
-SELECT
-CustomerID,
-CompanyName,
-Country,
-City
-INTO Cliente
-FROM NORTHWND.dbo.Customers;
-
-ALTER TABLE Cliente
-ADD CONSTRAINT pk_cliente PRIMARY KEY (CustomerID);
-GO
-
-CREATE TABLE Venta(
-idVenta INT IDENTITY(1,1) PRIMARY KEY,
-fechaVenta DATE NOT NULL,
-cliente_id NCHAR(5),
-CONSTRAINT fk_ventas_clientes
-FOREIGN KEY (cliente_id)
-REFERENCES Cliente(CustomerID)
-);
-
-CREATE TABLE DetalleVenta(
-idVenta INT NOT NULL,
-idProducto INT NOT NULL,
-PrecioVenta MONEY NOT NULL,
-Cantidad INT NOT NULL,
-CONSTRAINT pk_detalle PRIMARY KEY(idVenta, idProducto),
-CONSTRAINT fk_detalle_producto
-FOREIGN KEY (idProducto)
-REFERENCES Producto(ProductID),
-CONSTRAINT fk_detalle_venta
-FOREIGN KEY (idVenta)
-REFERENCES Venta(idVenta)
-);
 GO
 
 CREATE TYPE type_detalle_venta AS TABLE
@@ -88,7 +37,7 @@ BEGIN
         WHERE p.ProductID IS NULL
     )
     BEGIN
-        THROW 50003, 'Uno o mï¿½s productos no existen', 1;
+        THROW 50003, 'Uno o más productos no existen', 1;
     END
 
     IF EXISTS (
@@ -109,7 +58,7 @@ BEGIN
 
     )
     BEGIN
-        THROW 50005, 'No hay suficiente stock para uno o mï¿½s productos', 1;
+        THROW 50005, 'No hay suficiente stock para uno o más productos', 1;
     END
 
     BEGIN TRANSACTION
